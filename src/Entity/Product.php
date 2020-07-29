@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -185,5 +186,27 @@ class Product
         }
 
         return $this;
+    }
+
+    public function getCurrentPrice() : float
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('isCurrent', true));
+
+        /** @var Price $currPrice */
+        $currPrice = $this->price->matching($criteria)->current();
+        return $currPrice->getValue();
+    }
+
+
+    public function getCurrentRating() : int
+    {
+        $total = $this->rating->count();
+        $sum = 0;
+        /** @var Rating $rating */
+        foreach ($this->rating as $rating) {
+            $sum += $rating->getValue();
+        }
+        return ceil($sum / $total);
     }
 }
