@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rating
 {
+
+    public const DEFAULT_RATING = 3;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

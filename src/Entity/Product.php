@@ -203,6 +203,9 @@ class Product
     {
         $total = $this->rating->count();
         $sum = 0;
+        if (empty($total)) {
+            return Rating::DEFAULT_RATING;
+        }
         /** @var Rating $rating */
         foreach ($this->rating as $rating) {
             $sum += $rating->getValue();
