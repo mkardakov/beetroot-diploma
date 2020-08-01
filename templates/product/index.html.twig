@@ -118,7 +118,8 @@
                     <img id="example" src="{{ product.image }}" alt=" " class="img-responsive" />
                 </div>
                 <div class="col-md-8 agileinfo_single_right">
-                    <div class="rating1">
+                    <div class="rating1" style="position: relative">
+                        <img src="{{ asset('images/ajax.gif') }}" class="preloader" style="display: none"/>
 						<span class="starRating">
                             {% for i in 5..1 %}
 							<input id="rating{{ i }}" type="radio" name="rating" value="{{ i }}" {{ i == product.getCurrentRating ? 'checked' :'' }}>
@@ -694,7 +695,8 @@
 
 {% block javascripts %}
     <script>
-        let PRODUCT_ID = {{ product.id }}
+        let PRODUCT_ID = {{ product.id }};
+        let TOKEN = '{{ csrf_token('add_to_cart') }}'
     </script>
     <script src="{{ asset('js/vote.js') }}"></script>
 {% endblock %}

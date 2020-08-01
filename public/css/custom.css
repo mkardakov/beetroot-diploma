@@ -1,0 +1,6 @@
+.preloader {
+    position: absolute;
+    top: -10px;
+    left: 5%;
+    width: 50px;
+}
