@@ -27,15 +27,6 @@ class ProductController extends AbstractController
      */
     public function index(Product $product)
     {
-        $singletone = Child::getInstance();
-        $singletone1 = Child::getInstance();
-
-        $product = new Product();
-        $product1 = new Product();
-        var_dump($singletone === $singletone1);
-        var_dump($product === $product1);
-        dump(count($singletone1->getData()));
-        exit;
         return $this->render('product/index.html.twig', [
             'product' => $product,
         ]);
