@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Rating;
-use App\Service\Child;
-use App\Service\Singletone;
+use App\Service\Cart\Cart;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
@@ -65,16 +64,13 @@ class ProductController extends AbstractController
         $products[$product->getId()]++;
 
         $session->set('order', $products);
+        return new Response();
     }
 
-    public function showCart(SessionInterface $session, EntityManagerInterface $em)
+    public function showCart(Cart $cart)
     {
-        $products = [];
-        if ($session->has('order')) {
-            $products = $em->getRepository(Product::class)->findBy(['id' => array_keys($session->get('order'))]);
-        }
         return $this->render('product/cart_modal.html.twig', [
-            'products' => $products
+            'cart' => $cart
         ]);
     }
 }

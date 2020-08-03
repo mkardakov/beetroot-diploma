@@ -12,6 +12,7 @@ $(function() {
         event.stopPropagation();
         $.post(`/product/show_cart`)
             .done(function(html) {
+                $('#exampleModal').remove();
                 $('body').append(html);
                 $('#exampleModal').modal('show');
             });
