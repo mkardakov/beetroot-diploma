@@ -10,7 +10,7 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class Cart
+class Cart implements \Countable
 {
 
     private $repository;
@@ -41,6 +41,8 @@ class Cart
         return empty($this->getProductsList());
     }
 
+
+
     private function getProductsList() : array
     {
         if (!$this->session->has('order')) {
@@ -49,5 +51,30 @@ class Cart
         return $this->em
             ->getRepository(Product::class)
             ->findBy(['id' => array_keys($this->session->get('order'))]);
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        $count = 0;
+        $items = $this->getItems();
+        /** @var Item $item */
+        foreach ($items as $item) {
+            $count += $item->getCount();
+        }
+        return $count;
+    }
+
+    public function getTotal(): float
+    {
+        $cost = 0;
+        $items = $this->getItems();
+        /** @var Item $item */
+        foreach ($items as $item) {
+            $cost += $item->getCost();
+        }
+        return $cost;
     }
 }

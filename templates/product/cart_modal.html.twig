@@ -36,7 +36,7 @@
             </div>
             <div class="modal-footer">
                 {% if not cart.empty %}
-                <a href="/checkout" class="btn btn-primary">Перейти к оплате</a>
+                <a href="{{ path('checkout') }}" class="btn btn-primary">Перейти к оплате</a>
                 {% endif %}
             </div>
         </div>
