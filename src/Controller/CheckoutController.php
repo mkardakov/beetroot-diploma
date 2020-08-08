@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\OrderProduct;
 use App\Form\OrderType;
 use App\Service\Cart\Cart;
 use App\Service\Cart\Item;
@@ -29,8 +30,12 @@ class CheckoutController extends AbstractController
             $order->setStatus(0);
             /** @var Item $item */
             foreach ($cart->getItems() as $item) {
-                $order->addProduct($item->getProduct());
-                $em->persist($item->getProduct());
+                $orderProduct = new OrderProduct();
+                $orderProduct->setLinkedOrder($order);
+                $orderProduct->setProduct($item->getProduct());
+                $orderProduct->setCost($item->getCost());
+                $orderProduct->setTotal($item->getCount());
+                $em->persist($orderProduct);
             }
             $em->persist($order);
             $em->flush();

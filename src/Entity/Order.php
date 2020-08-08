@@ -51,13 +51,13 @@ class Order
     private $address;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orders")
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="linkedOrder")
      */
-    private $products;
+    private $orderProducts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
