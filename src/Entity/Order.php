@@ -33,6 +33,11 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $phone;
 
     /**
@@ -145,4 +150,22 @@ class Order
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
 }
