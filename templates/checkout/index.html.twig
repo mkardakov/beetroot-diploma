@@ -75,31 +75,32 @@
                             <th>Продукт</th>
                             <th>Количество</th>
                             <th>Название</th>
-
                             <th>Цена</th>
+                            <th>Общая стоимость</th>
                             <th>Удалить</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in cart.getItems %}
-                        <tr class="rem1">
+                        <tr class="rem1" data-productid="{{ item.product.id }}">
                             <td class="invert">1</td>
                             <td class="invert-image"><a href="{{ path('product_show', {'id': item.getProduct.id}) }}"><img src="{{ item.getProduct.image }}" alt=" " class="img-responsive"></a></td>
                             <td class="invert">
                                 <div class="quantity">
                                     <div class="quantity-select">
                                         <div class="entry value-minus">&nbsp;</div>
-                                        <div class="entry value"><span>{{ item.count }}</span></div>
+                                        <div class="entry value item-count"><span>{{ item.count }}</span></div>
                                         <div class="entry value-plus active">&nbsp;</div>
                                     </div>
                                 </div>
                             </td>
                             <td class="invert">{{ item.getTitle }}</td>
 
-                            <td class="invert">{{ item.getCost }} грн</td>
+                            <td class="invert">{{ item.product.getCurrentPrice }} грн</td>
+                            <td class="invert"><span class="item-total">{{ item.getCost }}</span> грн</td>
                             <td class="invert">
                                 <div class="rem">
-                                    <div class="close1"> </div>
+                                    <div class="close1" > </div>
                                 </div>
 
                             </td>
@@ -109,9 +110,9 @@
                 </div>
                 <div class="checkout-left">
                     <div class="col-md-4 checkout-left-basket">
-                        <h4>Continue to basket</h4>
+                        <h4><a href="{{ path('index') }}">Вернуться в магазин</a></h4>
                         <ul>
-                            <li>Сумма <i>-</i> <span>{{ cart.getTotal }} грн</span></li>
+                            <li>Сумма <i>-</i> <span><span id="total" style="float:left">{{ cart.getTotal }}</span> грн</span></li>
                         </ul>
                     </div>
                     {% if cart.empty %}
@@ -180,31 +181,6 @@
         $('.value-minus').on('click', function(){
             var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
             if(newVal>=1) divUpd.text(newVal);
-        });
-    </script>
-    <!--quantity-->
-    <script>$(document).ready(function(c) {
-            $('.close1').on('click', function(c){
-                $('.rem1').fadeOut('slow', function(c){
-                    $('.rem1').remove();
-                });
-            });
-        });
-    </script>
-    <script>$(document).ready(function(c) {
-            $('.close2').on('click', function(c){
-                $('.rem2').fadeOut('slow', function(c){
-                    $('.rem2').remove();
-                });
-            });
-        });
-    </script>
-    <script>$(document).ready(function(c) {
-            $('.close3').on('click', function(c){
-                $('.rem3').fadeOut('slow', function(c){
-                    $('.rem3').remove();
-                });
-            });
         });
     </script>
 
