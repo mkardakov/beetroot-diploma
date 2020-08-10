@@ -1,10 +1,10 @@
 <div class="agileits_header">
     <div class="w3l_offers">
-        <a href="products.html">Today's special Offers !</a>
+        <a href="products.html">Спец предложения !</a>
     </div>
     <div class="w3l_search">
         <form action="#" method="post">
-            <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+            <input type="text" name="Product" value="Найти продукт..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
             <input type="submit" value=" ">
         </form>
     </div>
@@ -13,7 +13,7 @@
             <fieldset>
                 <input type="hidden" name="cmd" value="_cart" />
                 <input type="hidden" name="display" value="1" />
-                <input type="submit" name="submit" id="show_cart" value="View your cart" class="button" />
+                <input type="submit" name="submit" id="show_cart" value="Корзина" class="button" />
             </fieldset>
         </form>
     </div>
@@ -24,8 +24,8 @@
                 <div class="mega-dropdown-menu">
                     <div class="w3ls_vegetables">
                         <ul class="dropdown-menu drp-mnu">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="login.html">Sign Up</a></li>
+                            <li><a href="login.html">Войти</a></li>
+                            <li><a href="login.html">Зарегистрироваться</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
         </ul>
     </div>
     <div class="w3l_header_right1">
-        <h2><a href="mail.html">Contact Us</a></h2>
+        <h2><a href="{{ path('page_contact_us') }}">Написать</a></h2>
     </div>
     <div class="clearfix"> </div>
 </div>
