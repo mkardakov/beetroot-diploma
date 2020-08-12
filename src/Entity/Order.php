@@ -55,6 +55,11 @@ class Order
      */
     private $orderProducts;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->orderProducts = new ArrayCollection();
@@ -165,6 +170,18 @@ class Order
     public function setEmail($email): self
     {
         $this->email = $email;
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
         return $this;
     }
 

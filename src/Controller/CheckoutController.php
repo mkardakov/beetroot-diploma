@@ -28,6 +28,9 @@ class CheckoutController extends AbstractController
                 throw new BadRequestException('You are not permitted to do this action');
             }
             $order->setStatus(0);
+            if ($this->isGranted('ROLE_USER')) {
+                $order->setUser($this->getUser());
+            }
             /** @var Item $item */
             foreach ($cart->getItems() as $item) {
                 $orderProduct = new OrderProduct();
@@ -50,8 +53,4 @@ class CheckoutController extends AbstractController
         ]);
     }
 
-    public function pay()
-    {
-
-    }
 }

@@ -38,4 +38,9 @@ class Navigation
             'parent' => null
         ]);
     }
+
+    public function getAllCategories()
+    {
+        return $this->categoryRepo->findAll();
+    }
 }
