@@ -133,9 +133,9 @@ class Order
     /**
      * @return Collection|Product[]
      */
-    public function getProducts(): Collection
+    public function getOrderProducts(): Collection
     {
-        return $this->products;
+        return $this->orderProducts;
     }
 
     public function addProduct(Product $product): self
