@@ -46,7 +46,7 @@ class Product
     private $rating;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="products")
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="products", cascade={"persist"})
      */
     private $categories;
 
