@@ -68,7 +68,7 @@
                         <img src="{{ asset('images/ajax.gif') }}" class="preloader" style="display: none"/>
 						<span class="starRating">
                             {% for i in 5..1 %}
-							<input id="rating{{ i }}" type="radio" name="rating" value="{{ i }}" {{ i == product.getCurrentRating ? 'checked' :'' }}>
+							<input id="rating{{ i }}" data-productid="{{ product.id }}" type="radio" name="rating" value="{{ i }}" {{ i == product.getCurrentRating ? 'checked' :'' }}>
 							<label for="rating{{ i }}">{{ i }}</label>
                             {% endfor %}
 						</span>
