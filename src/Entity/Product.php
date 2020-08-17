@@ -36,7 +36,7 @@ class Product
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Price::class, mappedBy="product", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $price;
 
