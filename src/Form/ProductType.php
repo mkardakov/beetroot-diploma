@@ -19,7 +19,8 @@ class ProductType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('image')
-            ->add('categories', null, ['by_reference' => false]);
+            ->add('categories', null, ['by_reference' => false])
+            ->add('isSale');
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var Product $product */

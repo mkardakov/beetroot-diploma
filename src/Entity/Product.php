@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Product
 {
@@ -55,12 +56,29 @@ class Product
      */
     private $orderProducts;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private $isSale;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $addedAt;
+
     public function __construct()
     {
         $this->price = new ArrayCollection();
         $this->rating = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->orderProducts = new ArrayCollection();
+    }
+
+    /** @ORM\PrePersist */
+    public function doStuff()
+    {
+        $this->addedAt = new \DateTime();
+       // $this->addedAt->setTimezone(New \DateTimeZone('UTC'));
     }
 
     public function getId(): ?int
@@ -201,7 +219,7 @@ class Product
 
         /** @var Price $currPrice */
         $currPrice = $this->price->matching($criteria)->current();
-        return $currPrice->getValue();
+        return $currPrice ? $currPrice->getValue() : 0;
     }
 
 
@@ -243,6 +261,18 @@ class Product
             $this->orderProducts->removeElement($order);
             $order->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getIsSale(): ?bool
+    {
+        return $this->isSale;
+    }
+
+    public function setIsSale(bool $isSale): self
+    {
+        $this->isSale = $isSale;
 
         return $this;
     }
